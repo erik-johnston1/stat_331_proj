@@ -13,7 +13,7 @@ wts3 = rep(1/3, 3)
 wts4 = rep(.25, 4)
 wts5 = rep(.2, 5)
 ## 2009 Portfolio
-stocks_2009_v <- c("XL", "THC", "AMD", "F", "GNW")
+stocks_2009_v <- c("THC", "AMD", "F", "GNW")
 df_stocks_2009 <- stocks_2009_v %>% 
   tq_get(get = "stock.prices", from = "2010-01-01", to = "2014-12-31") %>% 
   group_by(symbol) %>% 
@@ -23,11 +23,12 @@ df_stocks_2009 <- stocks_2009_v %>%
                col_rename = "Return") %>%
   tq_portfolio(assets_col = symbol,
                returns_col = Return,
-               weights = wts4,
+                weights = wts4,
                col_rename = "Return") %>% 
   add_row(Return = 0, date = ymd("2010-01-01") - years(1), .before = 1)
+  
 ## 2010 Portfolio
-stocks_2010_v <- c("CMI", "AKAM", "CRM", "BKNG", "CTBB")
+stocks_2010_v <- c("CMI", "AKAM", "CRM", "BKNG")
 df_stocks_2010 <- stocks_2010_v %>% 
   tq_get(get = "stock.prices", from = "2011-01-01", to = "2015-12-31") %>% 
   group_by(symbol) %>% 
@@ -41,7 +42,7 @@ df_stocks_2010 <- stocks_2010_v %>%
                col_rename = "Return") %>% 
   add_row(Return = 0, date = ymd("2011-01-01") - years(1), .before = 1)
 ## 2011 Portfolio
-stocks_2011_v <- c("CTRA", "EP-C", "MA", "HUM", "OKE")
+stocks_2011_v <- c("CTRA", "MA", "HUM", "OKE")
 df_stocks_2011 <- stocks_2011_v %>% 
   tq_get(get = "stock.prices", from = "2012-01-01", to = "2016-12-31") %>% 
   group_by(symbol) %>% 
@@ -55,7 +56,7 @@ df_stocks_2011 <- stocks_2011_v %>%
                col_rename = "Return") %>% 
   add_row(Return = 0, date = ymd("20112-01-01") - years(1), .before = 1)
 ## 2012 Portfolio
-stocks_2012_v <- c("SHLD", "BAC", "NFLX", "WHR", "FII")
+stocks_2012_v <- c("BAC", "NFLX", "WHR")
 df_stocks_2012 <- stocks_2012_v %>% 
   tq_get(get = "stock.prices", from = "2013-01-01", to = "2017-12-31") %>% 
   group_by(symbol) %>% 
@@ -83,7 +84,7 @@ df_stocks_2013 <- stocks_2013_v %>%
                col_rename = "Return") %>% 
   add_row(Return = 0, date = ymd("2014-01-01") - years(1), .before = 1)
 ## 2014 Portfolio
-stocks_2014_v <- c("LUV", "EA", "EW", "AVGO", "AGN")
+stocks_2014_v <- c("LUV", "EA", "EW", "AVGO")
 df_stocks_2014 <- stocks_2014_v %>% 
   tq_get(get = "stock.prices", from = "2015-01-01", to = "2019-12-31") %>% 
   group_by(symbol) %>% 
@@ -97,7 +98,7 @@ df_stocks_2014 <- stocks_2014_v %>%
                col_rename = "Return") %>% 
   add_row(Return = 0, date = ymd("2015-01-01") - years(1), .before = 1)
 ## 2015 Portfolio
-stocks_2015_v <- c("NFLX", "AMZN", "ATVI", "NVDA", "HRL")
+stocks_2015_v <- c("NFLX", "AMZN", "NVDA", "HRL")
 df_stocks_2015 <- stocks_2015_v %>% 
   tq_get(get = "stock.prices", from = "2016-01-01", to = "2020-12-31") %>% 
   group_by(symbol) %>% 
@@ -140,7 +141,7 @@ df_stocks_2017 <- stocks_2017_v %>%
                col_rename = "Return") %>% 
   add_row(Return = 0, date = ymd("2018-01-01") - years(1), .before = 1)
 ## 2018 Portfolio
-stocks_2018_v <- c("AMD", "ABMD", "FTNT", "TRIP", "RHT")
+stocks_2018_v <- c("AMD", "ABMD", "FTNT", "TRIP")
 df_stocks_2018 <- stocks_2018_v %>% 
   tq_get(get = "stock.prices", from = "2019-01-01", to = "2023-12-31") %>% 
   group_by(symbol) %>% 
@@ -159,7 +160,7 @@ df_stocks_2018 <- stocks_2018_v %>%
 ### Create the S&P 500 dataframes for each year
 
 ##SP500 2009
-df_SP500_2009  <-  tq_get(x = "SPY",
+df_SP500_2009  <- tq_get(x = "SPY",
                         get = "stock.prices",
                         from = "2010-01-01",
                         to = "2014-12-31") %>%

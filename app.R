@@ -7,10 +7,12 @@
 #    http://shiny.rstudio.com/
 #
 
+library(bslib)
 library(shiny)
 library(lubridate)
 library(tidyverse)
 source("df_proj.R")
+library(DT)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
@@ -25,13 +27,20 @@ ui <- fluidPage(
                   "Select Year:",
                   min = 2009,
                   max = 2018,
-                  value = 2014)
+                  value = 2014),
+      sliderInput("investmentAmount",
+                  "Select Investment Amount:",
+                  min = 1000,
+                  max = 5000,
+                  value = 3000, # Default value
+                  step = 250)
                   
       ),
       
       # Show a plot of the generated distribution
       mainPanel(
-        plotOutput("Plot")
+        plotOutput("Plot"),
+        DTOutput("investmentTable") # Add this line for the table output
       )
     )
   )
@@ -50,19 +59,41 @@ server <- function(input, output) {
 
        df %>%
           ggplot(aes(x = date)) +
-          geom_line(aes(y = SP500_Cum * 5000, color = "S&P 500"), linetype = "solid") +
-          geom_line(aes(y = RAND_Cum * 5000, color = "Created Portfolio"), linetype = "solid") +
+          geom_line(aes(y = SP500_Cum * input$investmentAmount, color = "S&P 500"), linetype = "solid") +
+          geom_line(aes(y = RAND_Cum * input$investmentAmount, color = "Created Portfolio"), linetype = "solid") +
           labs(title = "Portfolio Growth Comparison",
                subtitle = "Investment Value",
                y = NULL,
                x = "Years After Start Date",
                color = "Legend") +
-          scale_y_continuous(breaks = scales::pretty_breaks(n = 5)) +
+          scale_y_continuous(limits = c(1000, 35000), breaks = scales::pretty_breaks(n = 5)) +
           theme_bw()
          
-
             })
+    
+    output$investmentTable <- renderDT({
+      year <- as.character(input$Year)
+      df <- get(paste0("df_", year, "_final"))
+      
+      lastRow <- tail(df, 1)
+      
+      dataTable <- data.frame(
+        "Investment" = c("S&P 500", "Top Performing Stocks"),
+        "Final Investment Value" = c(round(lastRow$SP500_Cum[1] * input$investmentAmount, 2), round(lastRow$RAND_Cum[1] * input$investmentAmount, 2))
+      )
+      
+      datatable(dataTable, options = list(searching = FALSE, lengthChange = FALSE, paging = FALSE, info = FALSE))
+    
+    
+    })
+      
     }
+    
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+
+
+
+
