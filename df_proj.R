@@ -273,7 +273,7 @@ df_2009_final <- df_SP500_2009 %>%
          year_inception = '2009') %>% 
   group_by(year_inception) %>% 
   mutate(SP500_Cum = cumprod(1 + SP500_Return),
-         RAND_Cum = cumprod(1 + portfolio))f
+         RAND_Cum = cumprod(1 + portfolio))
 ##2010
 df_2010_final <- df_SP500_2010 %>% 
   rename("SP500_Return" = "Return") %>% 
