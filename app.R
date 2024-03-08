@@ -101,7 +101,8 @@ server <- function(input, output) {
     
     dataTable <- data.frame(
     "Ticker" = c(df_names$ticker),
-    "Company Name" = c(df_names$name)
+    "Company Name" = c(df_names$name),
+    check.names = FALSE
     )
     datatable(dataTable, options = list(searching = FALSE, lengthChange = FALSE, paging = FALSE, info = FALSE),
               rownames = FALSE, # Remove row names if not needed
