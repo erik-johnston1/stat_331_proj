@@ -159,7 +159,7 @@ df_stocks_2018 <- stocks_2018_v %>%
 ### Create the S&P 500 dataframes for each year
 
 ##SP500 2009
-df_SP500_2009  %>%  tq_get(x = "SPY",
+df_SP500_2009  <-  tq_get(x = "SPY",
                         get = "stock.prices",
                         from = "2010-01-01",
                         to = "2014-12-31") %>%
