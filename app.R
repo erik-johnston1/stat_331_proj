@@ -12,11 +12,14 @@ library(shiny)
 library(lubridate)
 library(tidyverse)
 library(DT)
+library(shinythemes)
 df_total_final <- readRDS("final_data_331.rds")
 df_names_final <- readRDS("final_names_331.rds")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
+  #Theme
+  theme = shinythemes::shinytheme("sandstone"),
   
   # Application title
   titlePanel("Investing"),
@@ -112,27 +115,22 @@ server <- function(input, output) {
 
 
   output$text_box <- renderUI({
-      text <- "The Efficient Market Hypothesis (EMH) is a fundamental concept in finance that suggests financial markets are efficient in reflecting all available information. In simpler terms, it implies that asset prices already incorporate all known information and that it's impossible to consistently beat the market by outsmarting it.<br><br>
-  
-  There are three forms of the Efficient Market Hypothesis:<br><br>
-  
-  &emsp;1. Weak Form: This form suggests that all past market prices and data are already reflected in current prices. Therefore, technical analysis (examining past price movements) cannot be used to predict future price movements.<br><br>
-  
-    &emsp;2. Semi-Strong Form: This form suggests that all publicly available information is already reflected in asset prices. Therefore, neither technical analysis nor fundamental analysis (examining financial statements and economic indicators) can consistently beat the market.<br><br>
-  
-    &emsp;3. Strong Form: This form suggests that all information, both public and private, is already reflected in asset prices. This implies that even insider information cannot give an investor an edge in the market.<br><br>
-  
-  The relevance of the Efficient Market Hypothesis to someone getting started in investing is significant. Here's how:<br><br>
-  
-    &emsp;1. Investment Strategies: EMH suggests that it's difficult to consistently beat the market through stock picking or market timing. Therefore, it encourages investors to adopt passive investment strategies, such as investing in index funds or exchange-traded funds (ETFs), which aim to match the performance of the overall market rather than trying to beat it.<br><br>
-  
-    &emsp;2. Risk Management: EMH underscores the importance of diversification as a risk management strategy. Since it's difficult to predict which individual stocks will outperform the market, spreading investments across a diversified portfolio can help mitigate risk.<br><br>
-  
-    &emsp;3. Long-Term Perspective: EMH suggests that short-term fluctuations in asset prices are largely unpredictable. Therefore, investors should focus on long-term investing goals and avoid making impulsive decisions based on short-term market movements.<br><br>
-  
-    &emsp;4. Informational Advantage: EMH implies that it's challenging to gain an informational advantage in the market. Instead of trying to outsmart other investors, beginners are encouraged to focus on learning the fundamentals of investing, such as understanding the principles of asset allocation, risk management, and the importance of staying disciplined in their investment approach.<br><br>
-  
-  In summary, while the Efficient Market Hypothesis may seem discouraging to those hoping to beat the market consistently, it provides valuable insights for beginners by emphasizing the importance of adopting a disciplined, long-term investment approach based on diversification and passive investing strategies."
+      text <- "The Efficient Market Hypothesis (EMH) is a fundamental concept in finance that suggests financial markets are efficient in reflecting all available information. Put simply, it implies that asset prices already incorporate all known information and that it's impossible to consistently beat the market by outsmarting it.<br><br>
+
+The relevance of the Efficient Market Hypothesis to someone getting started in investing is significant. Here's how:<br><br>
+
+&emsp;1. Investment Strategies: EMH suggests that it's difficult to consistently beat the market through stock picking or market timing. Just think about it… there are entire companies dedicated to doing what you as a single investor are trying to do. Instead of trying to outsmart other investors, focus on learning the fundamentals of investing, the importance of staying disciplined in your investment approach, and adopt passive investment strategies, such as investing in index funds or exchange-traded funds (ETFs), which aim to match the performance of the overall market rather than trying to beat it.<br><br>
+ 
+&emsp;2. Risk Management: EMH underscores the importance of diversification as a risk management strategy. Since it's difficult to predict which individual stocks will outperform the market, spreading investments across a diversified portfolio can help mitigate risk.<br><br>
+
+&emsp;3. Long-Term Perspective: EMH suggests that short-term fluctuations in asset prices are largely unpredictable. Therefore, you should focus on long-term investing goals and avoid making impulsive decisions based on short-term market movements.<br><br>
+
+We encourage you to explore the EHM in real time above! You will see the returns over five years if you were to pick the five best performing stocks from your selected year. This reflects a simple strategy you might select to try to beat the market: just pick the best performing stocks. You will see that some years you will win (beat the market), but others you will not. It is important to take even the wins with a grain of salt as the best performing stocks exhibit momentum.<br><br>
+
+Momentum in stock performance refers to the tendency of stocks that have performed well in the past to continue performing well in the near future, and stocks that have performed poorly to continue performing poorly. This concept is based on the idea that investors tend to follow trends and exhibit herd behavior, causing prices to continue moving in the same direction for a period of time.<br><br>
+
+The takeaway is this: over long-periods of time this momentum will slow and you will start losing to the market. For investors of all levels, but especially beginners, it is a good idea to keep the EHM front of mind and invest in index funds like the S&P 500.
+"
       
       HTML(paste0("<p>", text, "</p>"))
     })
